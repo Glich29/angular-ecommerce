@@ -7,7 +7,8 @@ import { CommonModule, NgFor } from '@angular/common';
   selector: 'app-product-list',
   standalone: true,
   imports: [NgFor, CommonModule],
-  templateUrl: './product-list-table.component.html',
+  templateUrl: './product-list-grid.component.html',
+  // templateUrl: './product-list-table.component.html',
   // templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css',
   providers: [ProductService]
