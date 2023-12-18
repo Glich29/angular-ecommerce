@@ -5,7 +5,7 @@
                 <!-- loop over products collection-->
                 <div  *ngFor="let product of products" class="col-sm-3">
                     <div class="product-box">
-                        <img src='{{ product.imageUrl }}' class="img-fluid"/>
+                        <img src='{{ utilsService.getImgSrc(product.imageUrl) }}' class="img-fluid"/>
                         <h1>{{ product.name }}</h1>
                         <div class="price">{{ product.unitPrice | currency: 'USD' }}</div>
                         <a href="#" class="primary-btn">Add to cart</a>

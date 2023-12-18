@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ProductService } from '../../services/product.service';
+import { UtilsService } from '../../services/utils.service'
 import { Product } from '../../common/product';
 import { CommonModule, NgFor } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
@@ -10,13 +11,14 @@ import { ActivatedRoute } from '@angular/router';
   imports: [NgFor, CommonModule],
   templateUrl: './product-list-grid.component.html',
   styleUrl: './product-list.component.css',
-  providers: [ProductService]
+  providers: [ProductService, UtilsService]
 })
 export class ProductListComponent {
   products: Product[] = [];
   currentCategoryId: number = 1;
 
   constructor(private productService: ProductService,
+    public utilsService: UtilsService,
     private route: ActivatedRoute) { }
 
   ngOnInit() {

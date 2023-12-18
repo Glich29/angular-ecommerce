@@ -370,7 +370,8 @@ input.au-input.au-input-xl{
     display:block;
     color:#555;
     font-size:16px;
-    padding:5px 0
+    padding:5px 0;
+    cursor: pointer;
 }
 
 .navbar-sidebar .navbar-list li a i{
@@ -752,6 +753,7 @@ a.primary-btn:hover{
 
 .active-link {
   font-weight: bold;
+  cursor: pointer;
 }
 
 /* 

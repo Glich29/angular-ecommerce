@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { ProductListComponent } from "./components/product-list/product-list.component";
 import { HttpClientModule } from '@angular/common/http';
 
@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [CommonModule, RouterOutlet, ProductListComponent, HttpClientModule]
+    imports: [CommonModule, RouterLink, RouterLinkActive, RouterOutlet, ProductListComponent, HttpClientModule]
 })
 export class AppComponent {
   title = 'angular-ecommerce';
