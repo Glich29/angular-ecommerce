@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { UtilsService } from '../../services/utils.service'
 import { Product } from '../../common/product';
@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './product-list.component.css',
   providers: [ProductService, UtilsService]
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit{
   products: Product[] = [];
   currentCategoryId: number = 1;
 
@@ -23,7 +23,7 @@ export class ProductListComponent {
 
   ngOnInit() {
     this.route.paramMap.subscribe(() => { this.listProducts() });
-  
+
   }
   listProducts() {
     //check if 'id' parameter is available.
