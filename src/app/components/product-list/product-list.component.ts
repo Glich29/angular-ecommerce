@@ -2,13 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {ProductService} from '../../services/product.service';
 import {UtilsService} from '../../services/utils.service'
 import {Product} from '../../common/product';
-import {CommonModule, NgFor} from '@angular/common';
-import {ActivatedRoute} from '@angular/router';
+import {CommonModule, NgFor, NgOptimizedImage} from '@angular/common';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [NgFor, CommonModule],
+  imports: [NgFor, CommonModule, RouterLink, NgOptimizedImage],
   templateUrl: './product-list-grid.component.html',
   styleUrl: './product-list.component.css',
   providers: [ProductService, UtilsService]

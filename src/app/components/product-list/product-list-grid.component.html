@@ -5,8 +5,12 @@
                 <!-- loop over products collection-->
                 <div  *ngFor="let product of products" class="col-sm-3">
                     <div class="product-box">
-                        <img src='{{ utilsService.getImgSrc(product.imageUrl) }}' class="img-fluid"/>
-                        <h1>{{ product.name }}</h1>
+                        <a routerLink="/products/{{ product.id }}">
+                            <img ngSrc='{{ product.imageUrl }}' width="120" height="150" class="img-fluid"/>
+                        </a>
+                        <a routerLink="/products/{{ product.id}}">
+                            <h1>{{ product.name }}</h1>
+                        </a>
                         <div class="price">{{ product.unitPrice | currency: 'USD' }}</div>
                         <a href="#" class="primary-btn">Add to cart</a>
                     </div>
