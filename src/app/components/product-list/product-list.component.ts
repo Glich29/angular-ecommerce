@@ -5,14 +5,17 @@ import {Product} from '../../common/product';
 import {CommonModule, NgFor, NgOptimizedImage} from '@angular/common';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {NgbPagination} from "@ng-bootstrap/ng-bootstrap";
+import {CartItem} from "../../common/cart-item";
+import {CartService} from "../../services/cart.service";
+import {CartStatusComponent} from "../cart-status/cart-status.component";
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [NgFor, CommonModule, RouterLink, NgOptimizedImage, NgbPagination],
+  imports: [NgFor, CommonModule, RouterLink, NgOptimizedImage, NgbPagination, CartStatusComponent],
   templateUrl: './product-list-grid.component.html',
   styleUrl: './product-list.component.css',
-  providers: [ProductService, UtilsService]
+  providers: [ProductService, UtilsService, CartService]
 })
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
@@ -29,6 +32,7 @@ export class ProductListComponent implements OnInit {
 
   constructor(private productService: ProductService,
               public utilsService: UtilsService,
+              private cartService: CartService,
               private route: ActivatedRoute) {
   }
 
@@ -111,5 +115,12 @@ export class ProductListComponent implements OnInit {
       this.thePageSize = data.page.size;
       this.theTotalElements = data.page.totalElements;
     }
+  }
+
+  addToCart(theProduct: Product) {
+    console.log(`Adding to cart: ${theProduct.name}, ${theProduct.unitPrice}`);
+
+    const theCartItem = new CartItem(theProduct);
+    this.cartService.addToCart(theCartItem);
   }
 }

@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {ProductCategoryMenuComponent} from "./components/product-category-menu/product-category-menu.component";
 import {SearchComponent} from "./components/search/search.component";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {CartStatusComponent} from "./components/cart-status/cart-status.component";
 
 @Component({
     selector: 'app-root',
@@ -13,7 +14,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
   imports: [CommonModule, RouterLink, RouterLinkActive, RouterOutlet, ProductListComponent, HttpClientModule,
-    ProductCategoryMenuComponent, SearchComponent, NgbModule]
+    ProductCategoryMenuComponent, SearchComponent, NgbModule, CartStatusComponent]
 })
 export class AppComponent {
   title = 'angular-ecommerce';
