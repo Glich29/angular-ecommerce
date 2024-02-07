@@ -15,7 +15,7 @@ import {CartStatusComponent} from "../cart-status/cart-status.component";
   imports: [NgFor, CommonModule, RouterLink, NgOptimizedImage, NgbPagination, CartStatusComponent],
   templateUrl: './product-list-grid.component.html',
   styleUrl: './product-list.component.css',
-  providers: [ProductService, UtilsService, CartService]
+  providers: [ProductService, UtilsService]
 })
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
