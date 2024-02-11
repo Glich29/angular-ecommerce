@@ -1,12 +1,14 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CartService} from "../../services/cart.service";
 import {CurrencyPipe} from "@angular/common";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-cart-status',
   standalone: true,
   imports: [
-    CurrencyPipe
+    CurrencyPipe,
+    RouterLink
   ],
   templateUrl: './cart-status.component.html',
   styleUrl: './cart-status.component.css'
