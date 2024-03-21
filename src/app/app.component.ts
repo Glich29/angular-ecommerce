@@ -7,6 +7,7 @@ import {ProductCategoryMenuComponent} from "./components/product-category-menu/p
 import {SearchComponent} from "./components/search/search.component";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {CartStatusComponent} from "./components/cart-status/cart-status.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @Component({
     selector: 'app-root',
@@ -14,7 +15,7 @@ import {CartStatusComponent} from "./components/cart-status/cart-status.componen
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
   imports: [CommonModule, RouterLink, RouterLinkActive, RouterOutlet, ProductListComponent, HttpClientModule,
-    ProductCategoryMenuComponent, SearchComponent, NgbModule, CartStatusComponent]
+    ProductCategoryMenuComponent, SearchComponent, NgbModule, CartStatusComponent, ReactiveFormsModule]
 })
 export class AppComponent {
   title = 'angular-ecommerce';
