@@ -1,23 +1,30 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
-import {CurrencyPipe} from "@angular/common";
+import {CurrencyPipe, NgForOf} from "@angular/common";
+import {EcommerceFormService} from "../../services/ecommerce-form.service";
 
 @Component({
   selector: 'app-checkout',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    CurrencyPipe
+    CurrencyPipe,
+    NgForOf
   ],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css'
 })
 export class CheckoutComponent implements OnInit{
   checkoutFormGroup!: FormGroup;
+
   totalPrice: number = 0;
   totalQuantity: number = 0;
 
-  constructor(private formBuilder: FormBuilder) {
+  creditCardYears: number[] = [];
+  creditCardMonths: number[] = [];
+
+  constructor(private formBuilder: FormBuilder,
+              private  formService: EcommerceFormService) {
   }
 
   ngOnInit(): void {
@@ -49,7 +56,44 @@ export class CheckoutComponent implements OnInit{
         expirationMonth: [''],
         expirationYear: ['']
       })
-    })
+    });
+
+    //populate credit card months
+    const startMonth: number = new Date().getMonth() + 1;
+    console.log("startMonth: " + startMonth);
+    this.formService.getCreditCardMonths(startMonth).subscribe(
+      data => {
+        console.log("Retrieved credit card months: " + JSON.stringify(data));
+        this.creditCardMonths = data;
+      }
+    );
+    //populate credit card years
+    this.formService.getCreditCardYears().subscribe(
+      data => {
+        console.log("Retrieved credit card years: " + JSON.stringify(data));
+        this.creditCardYears = data;
+      }
+    );
+  }
+
+  handleMonthsAndYears() {
+    const creditCardFormGroup = this.checkoutFormGroup.get('creditCard');
+    const currentYear: number = new Date().getFullYear();
+    const selectedYear: number = Number(creditCardFormGroup?.get('expirationYear')?.value);
+
+    let startMonth: number;
+    if (currentYear === selectedYear) {
+      startMonth = new Date().getMonth() + 1;
+    } else {
+      startMonth = 1;
+    }
+
+    this.formService.getCreditCardMonths(startMonth).subscribe(
+      data => {
+        console.log("Retrieved credit card month: " + JSON.stringify(data));
+        this.creditCardMonths = data;
+      }
+    )
   }
 
   copyShippingAddressToBillingAddress(event: Event) {
