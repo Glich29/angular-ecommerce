@@ -5,6 +5,7 @@ import {EcommerceFormService} from "../../services/ecommerce-form.service";
 import {Country} from "../../common/country";
 import {State} from "../../common/state";
 import {EComValidator} from "../../validators/ecom-validator";
+import {CartService} from "../../services/cart.service";
 
 @Component({
   selector: 'app-checkout',
@@ -19,10 +20,10 @@ import {EComValidator} from "../../validators/ecom-validator";
   styleUrl: './checkout.component.css',
   providers: [EcommerceFormService]
 })
-export class CheckoutComponent implements OnInit{
+export class CheckoutComponent implements OnInit {
   checkoutFormGroup!: FormGroup;
 
-  totalPrice: number = 0;
+  totalPrice: number = 0.00;
   totalQuantity: number = 0;
 
   creditCardYears: number[] = [];
@@ -34,10 +35,14 @@ export class CheckoutComponent implements OnInit{
   billingAddressStates: State[] = [];
 
   constructor(private formBuilder: FormBuilder,
-              private  formService: EcommerceFormService) {
+              private formService: EcommerceFormService,
+              private cartService: CartService) {
   }
 
   ngOnInit(): void {
+
+    this.viewCartDetails();
+
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
         firstName: new FormControl('',
@@ -80,7 +85,6 @@ export class CheckoutComponent implements OnInit{
     });
 
 
-
     //populate credit card months
     const startMonth: number = new Date().getMonth() + 1;
     console.log("startMonth: " + startMonth);
@@ -105,6 +109,20 @@ export class CheckoutComponent implements OnInit{
         this.countries = data;
       }
     )
+  }
+
+  // ngOnDestroy() {
+  //   this.cartService.totalPrice.unsubscribe();
+  //   this.cartService.totalQuantity.unsubscribe();
+  // }
+
+  viewCartDetails() {
+    this.cartService.totalQuantity.subscribe(
+      data => this.totalQuantity = data
+    );
+    this.cartService.totalPrice.subscribe(
+      data => this.totalPrice = data
+    );
   }
 
   get firstName() {
@@ -162,12 +180,15 @@ export class CheckoutComponent implements OnInit{
   get creditCardType() {
     return this.checkoutFormGroup.get('creditCard.cardType')
   }
+
   get creditCardNameOnCard() {
     return this.checkoutFormGroup.get('creditCard.nameOnCard')
   }
+
   get creditCardNumber() {
     return this.checkoutFormGroup.get('creditCard.cardNumber')
   }
+
   get creditCardSecurityCode() {
     return this.checkoutFormGroup.get('creditCard.securityCode')
   }
@@ -220,7 +241,7 @@ export class CheckoutComponent implements OnInit{
 
     this.formService.getStates(countryCode).subscribe(
       data => {
-        if(formGroupName === 'shippingAddress') {
+        if (formGroupName === 'shippingAddress') {
           this.shippingAddressStates = data;
         } else {
           this.billingAddressStates = data;
