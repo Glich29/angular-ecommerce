@@ -90,8 +90,8 @@ export class CheckoutComponent implements OnInit {
     console.log("startMonth: " + startMonth);
     this.formService.getCreditCardMonths(startMonth).subscribe(
       data => {
-        console.log("Retrieved credit card months: " + JSON.stringify(data));
-        this.creditCardMonths = data;
+         console.log("Retrieved credit card months: " + JSON.stringify(data));
+         this.creditCardMonths = data;
       }
     );
     //populate credit card years
